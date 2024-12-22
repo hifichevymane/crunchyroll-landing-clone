@@ -35,7 +35,7 @@
 
 <style scoped>
 .wrapper {
-  @apply absolute top-14 flex bg-gray-900 text-gray-200 py-2 z-10;
+  @apply absolute top-14 left-0 w-[862px] flex bg-gray-900 text-gray-200 py-2 z-10;
 }
 
 .category-list {

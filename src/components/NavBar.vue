@@ -1,38 +1,80 @@
 <script setup>
 import BrowseDropdown from './BrowseDropdown.vue'
-import { ref } from 'vue'
+import NewsDropdown from './NewsDropdown.vue'
+import FadeTransition from './FadeTransition.vue'
+import { ref, computed } from 'vue'
 
-const browseDropdownOpened = ref(false)
+const DropdownType = {
+  CLOSED: 0,
+  BROWSE: 1,
+  NEWS: 2,
+}
 
-const onClickHandler = () => {
-  browseDropdownOpened.value = !browseDropdownOpened.value
+const openedDropdownType = ref(DropdownType.CLOSED)
+const browseDropdownOpened = computed(() => {
+  return openedDropdownType.value === DropdownType.BROWSE
+})
+
+const newsDropdownOpened = computed(() => {
+  return openedDropdownType.value === DropdownType.NEWS
+})
+
+const showOverlay = computed(() => {
+  return openedDropdownType.value !== DropdownType.CLOSED
+})
+
+const onBrowseMenuClick = () => {
+  if (openedDropdownType.value === DropdownType.BROWSE) {
+    openedDropdownType.value = DropdownType.CLOSED
+  } else {
+    openedDropdownType.value = DropdownType.BROWSE
+  }
+}
+
+const onNewsMenuClick = () => {
+  if (openedDropdownType.value === DropdownType.NEWS) {
+    openedDropdownType.value = DropdownType.CLOSED
+  } else {
+    openedDropdownType.value = DropdownType.NEWS
+  }
+}
+
+const onOverlayClick = () => {
+  openedDropdownType.value = DropdownType.CLOSED
 }
 </script>
 
 <template>
   <nav>
     <ul class="navbar">
-      <li class="nav-item" :class="[browseDropdownOpened && 'bg-gray-900']" @click="onClickHandler">
+      <li
+        class="nav-item"
+        :class="[browseDropdownOpened && 'bg-gray-900']"
+        @click="onBrowseMenuClick"
+      >
         <span>Browse</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path fill="currentColor" d="m12 15l5-5H7z" />
         </svg>
+        <FadeTransition>
+          <BrowseDropdown v-show="browseDropdownOpened" />
+        </FadeTransition>
       </li>
-      <Transition name="fade">
-        <BrowseDropdown v-show="browseDropdownOpened" />
-      </Transition>
       <li class="nav-item">Games</li>
-      <li class="nav-item">
+      <li class="nav-item" :class="[newsDropdownOpened && 'bg-gray-900']" @click="onNewsMenuClick">
         <span>News</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path fill="currentColor" d="m12 15l5-5H7z" />
         </svg>
+        <FadeTransition>
+          <NewsDropdown v-show="newsDropdownOpened" />
+        </FadeTransition>
       </li>
     </ul>
   </nav>
-  <Transition name="fade">
-    <div class="overlay" v-show="browseDropdownOpened" @click="onClickHandler"></div>
-  </Transition>
+  <FadeTransition>
+    <div class="overlay" v-show="showOverlay" @click="onOverlayClick"></div>
+  </FadeTransition>
 </template>
 
 <style scoped>
@@ -45,22 +87,7 @@ const onClickHandler = () => {
 }
 
 .nav-item {
-  @apply px-5 py-4 font-main cursor-pointer text-gray-200
+  @apply px-5 py-4 font-main relative cursor-pointer text-gray-200
   flex items-center gap-1 select-none transition-colors hover:bg-gray-900;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  @apply opacity-0;
-}
-
-.fade-enter-to,
-.fade-leave-from {
-  @apply opacity-100;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  @apply transition-opacity duration-200;
 }
 </style>
