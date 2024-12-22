@@ -10,22 +10,24 @@ const onClickHandler = () => {
 </script>
 
 <template>
-  <ul class="navbar">
-    <li class="nav-item" :class="[browseDropdownOpened && 'bg-gray-900']" @click="onClickHandler">
-      <span>Browse</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-        <path fill="currentColor" d="m12 15l5-5H7z" />
-      </svg>
-    </li>
-    <BrowseDropdown v-show="browseDropdownOpened" />
-    <li class="nav-item">Games</li>
-    <li class="nav-item">
-      <span>News</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-        <path fill="currentColor" d="m12 15l5-5H7z" />
-      </svg>
-    </li>
-  </ul>
+  <nav>
+    <ul class="navbar">
+      <li class="nav-item" :class="[browseDropdownOpened && 'bg-gray-900']" @click="onClickHandler">
+        <span>Browse</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path fill="currentColor" d="m12 15l5-5H7z" />
+        </svg>
+      </li>
+      <BrowseDropdown v-show="browseDropdownOpened" />
+      <li class="nav-item">Games</li>
+      <li class="nav-item">
+        <span>News</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path fill="currentColor" d="m12 15l5-5H7z" />
+        </svg>
+      </li>
+    </ul>
+  </nav>
   <div class="overlay" v-show="browseDropdownOpened" @click="onClickHandler"></div>
 </template>
 
