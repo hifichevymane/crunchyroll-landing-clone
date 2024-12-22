@@ -3,6 +3,7 @@ import BrowseDropdown from './BrowseDropdown.vue'
 import NewsDropdown from './NewsDropdown.vue'
 import FadeTransition from './FadeTransition.vue'
 import AccountDropdown from './AccountDropdown.vue'
+import PremiumTooltip from './PremiumTooltip.vue'
 
 import { ref, computed } from 'vue'
 
@@ -13,6 +14,7 @@ const DropdownType = {
   ACCOUNT: 3,
 }
 
+const premiumTooltipOpened = ref(false)
 const openedDropdownType = ref(DropdownType.CLOSED)
 const browseDropdownOpened = computed(() => {
   return openedDropdownType.value === DropdownType.BROWSE
@@ -57,6 +59,13 @@ const onAccountMenuClick = () => {
 const onOverlayClick = () => {
   openedDropdownType.value = DropdownType.CLOSED
 }
+
+const onTrialPremiumMouseOver = () => {
+  premiumTooltipOpened.value = true
+}
+const onTrialPremiumMouseOut = () => {
+  premiumTooltipOpened.value = false
+}
 </script>
 
 <template>
@@ -95,7 +104,11 @@ const onOverlayClick = () => {
         </li>
       </div>
       <div class="nav-actions">
-        <li class="nav-item premium-link">
+        <li
+          class="nav-item premium-link"
+          @mouseover="onTrialPremiumMouseOver"
+          @mouseout="onTrialPremiumMouseOut"
+        >
           <svg
             class="premium-logo"
             xmlns="http://www.w3.org/2000/svg"
@@ -114,6 +127,9 @@ const onOverlayClick = () => {
             <span class="try-free-text">TRY FREE</span>
             <span class="premium-text">PREMIUM</span>
           </div>
+          <FadeTransition>
+            <PremiumTooltip v-show="premiumTooltipOpened" />
+          </FadeTransition>
         </li>
         <li class="nav-item">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
