@@ -4,25 +4,42 @@ import NewsDropdown from './NewsDropdown.vue'
 import FadeTransition from './FadeTransition.vue'
 import { ref, computed } from 'vue'
 
-const browseDropdownOpened = ref(false)
-const newsDropdownOpened = ref(false)
+const DropdownType = {
+  BROWSE: 'BROWSE',
+  NEWS: 'NEWS',
+}
+
+const openedDropdownType = ref('')
+const browseDropdownOpened = computed(() => {
+  return openedDropdownType.value === DropdownType.BROWSE
+})
+
+const newsDropdownOpened = computed(() => {
+  return openedDropdownType.value === DropdownType.NEWS
+})
+
 const showOverlay = computed(() => {
-  return browseDropdownOpened.value || newsDropdownOpened.value
+  return Object.values(DropdownType).includes(openedDropdownType.value)
 })
 
 const onBrowseMenuClick = () => {
-  newsDropdownOpened.value = false
-  browseDropdownOpened.value = !browseDropdownOpened.value
+  if (openedDropdownType.value === DropdownType.BROWSE) {
+    openedDropdownType.value = ''
+  } else {
+    openedDropdownType.value = DropdownType.BROWSE
+  }
 }
 
 const onNewsMenuClick = () => {
-  browseDropdownOpened.value = false
-  newsDropdownOpened.value = !newsDropdownOpened.value
+  if (openedDropdownType.value === DropdownType.NEWS) {
+    openedDropdownType.value = ''
+  } else {
+    openedDropdownType.value = DropdownType.NEWS
+  }
 }
 
 const onOverlayClick = () => {
-  newsDropdownOpened.value = false
-  browseDropdownOpened.value = false
+  openedDropdownType.value = ''
 }
 </script>
 
