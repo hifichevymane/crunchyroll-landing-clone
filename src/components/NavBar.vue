@@ -11,10 +11,12 @@ const showOverlay = computed(() => {
 })
 
 const onBrowseMenuClick = () => {
+  newsDropdownOpened.value = false
   browseDropdownOpened.value = !browseDropdownOpened.value
 }
 
 const onNewsMenuClick = () => {
+  browseDropdownOpened.value = false
   newsDropdownOpened.value = !newsDropdownOpened.value
 }
 
