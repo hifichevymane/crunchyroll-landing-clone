@@ -20,10 +20,7 @@ const newsDropdownOpened = computed(() => {
 })
 
 const showOverlay = computed(() => {
-  return (
-    openedDropdownType.value === DropdownType.BROWSE ||
-    openedDropdownType.value === DropdownType.NEWS
-  )
+  return openedDropdownType.value !== DropdownType.CLOSED
 })
 
 const onBrowseMenuClick = () => {
