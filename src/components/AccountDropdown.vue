@@ -57,6 +57,7 @@
 
 .premium-trial-btn {
   @apply bg-yellow-500 text-gray-900 py-3 mt-4 mx-4 font-bold
-  flex items-center justify-center gap-1;
+  flex items-center justify-center gap-1
+  transition-colors duration-150 hover:bg-yellow-400;
 }
 </style>
