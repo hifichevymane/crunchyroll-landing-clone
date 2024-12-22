@@ -2,12 +2,15 @@
 import BrowseDropdown from './BrowseDropdown.vue'
 import NewsDropdown from './NewsDropdown.vue'
 import FadeTransition from './FadeTransition.vue'
+import AccountDropdown from './AccountDropdown.vue'
+
 import { ref, computed } from 'vue'
 
 const DropdownType = {
   CLOSED: 0,
   BROWSE: 1,
   NEWS: 2,
+  ACCOUNT: 3,
 }
 
 const openedDropdownType = ref(DropdownType.CLOSED)
@@ -17,6 +20,10 @@ const browseDropdownOpened = computed(() => {
 
 const newsDropdownOpened = computed(() => {
   return openedDropdownType.value === DropdownType.NEWS
+})
+
+const accountDropdownOpened = computed(() => {
+  return openedDropdownType.value === DropdownType.ACCOUNT
 })
 
 const showOverlay = computed(() => {
@@ -36,6 +43,14 @@ const onNewsMenuClick = () => {
     openedDropdownType.value = DropdownType.CLOSED
   } else {
     openedDropdownType.value = DropdownType.NEWS
+  }
+}
+
+const onAccountMenuClick = () => {
+  if (openedDropdownType.value === DropdownType.ACCOUNT) {
+    openedDropdownType.value = DropdownType.CLOSED
+  } else {
+    openedDropdownType.value = DropdownType.ACCOUNT
   }
 }
 
@@ -113,13 +128,20 @@ const onOverlayClick = () => {
             <path fill="currentColor" d="M5 21V3h14v18l-7-3zm2-3.05l5-2.15l5 2.15V5H7zM7 5h10z" />
           </svg>
         </li>
-        <li class="nav-item">
+        <li
+          class="nav-item"
+          :class="[accountDropdownOpened && 'bg-gray-900']"
+          @click="onAccountMenuClick"
+        >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path
               fill="currentColor"
               d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2m0 7c2.67 0 8 1.33 8 4v3H4v-3c0-2.67 5.33-4 8-4m0 1.9c-2.97 0-6.1 1.46-6.1 2.1v1.1h12.2V17c0-.64-3.13-2.1-6.1-2.1"
             />
           </svg>
+          <FadeTransition>
+            <AccountDropdown v-show="accountDropdownOpened" />
+          </FadeTransition>
         </li>
       </div>
     </ul>
