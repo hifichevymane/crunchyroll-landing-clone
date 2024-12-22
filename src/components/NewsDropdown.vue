@@ -10,10 +10,10 @@
 
 <style scoped>
 .dropdown {
-  @apply absolute top-14 left-0 bg-gray-900;
+  @apply absolute top-14 left-0 bg-gray-900 py-2;
 }
 
 .dropdown-item {
-  @apply w-72 h-10 leading-10 cursor-pointer pl-5;
+  @apply w-72 h-10 leading-10 cursor-pointer pl-5 hover:bg-gray-800;
 }
 </style>
