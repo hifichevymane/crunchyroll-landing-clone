@@ -5,11 +5,12 @@ import FadeTransition from './FadeTransition.vue'
 import { ref, computed } from 'vue'
 
 const DropdownType = {
-  BROWSE: 'BROWSE',
-  NEWS: 'NEWS',
+  CLOSED: 0,
+  BROWSE: 1,
+  NEWS: 2,
 }
 
-const openedDropdownType = ref('')
+const openedDropdownType = ref(DropdownType.CLOSED)
 const browseDropdownOpened = computed(() => {
   return openedDropdownType.value === DropdownType.BROWSE
 })
@@ -19,12 +20,15 @@ const newsDropdownOpened = computed(() => {
 })
 
 const showOverlay = computed(() => {
-  return Object.values(DropdownType).includes(openedDropdownType.value)
+  return (
+    openedDropdownType.value === DropdownType.BROWSE ||
+    openedDropdownType.value === DropdownType.NEWS
+  )
 })
 
 const onBrowseMenuClick = () => {
   if (openedDropdownType.value === DropdownType.BROWSE) {
-    openedDropdownType.value = ''
+    openedDropdownType.value = DropdownType.CLOSED
   } else {
     openedDropdownType.value = DropdownType.BROWSE
   }
@@ -32,14 +36,14 @@ const onBrowseMenuClick = () => {
 
 const onNewsMenuClick = () => {
   if (openedDropdownType.value === DropdownType.NEWS) {
-    openedDropdownType.value = ''
+    openedDropdownType.value = DropdownType.CLOSED
   } else {
     openedDropdownType.value = DropdownType.NEWS
   }
 }
 
 const onOverlayClick = () => {
-  openedDropdownType.value = ''
+  openedDropdownType.value = DropdownType.CLOSED
 }
 </script>
 
