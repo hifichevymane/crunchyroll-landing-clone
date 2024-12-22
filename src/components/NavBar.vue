@@ -18,7 +18,9 @@ const onClickHandler = () => {
           <path fill="currentColor" d="m12 15l5-5H7z" />
         </svg>
       </li>
-      <BrowseDropdown v-show="browseDropdownOpened" />
+      <Transition name="fade">
+        <BrowseDropdown v-show="browseDropdownOpened" />
+      </Transition>
       <li class="nav-item">Games</li>
       <li class="nav-item">
         <span>News</span>
@@ -28,7 +30,9 @@ const onClickHandler = () => {
       </li>
     </ul>
   </nav>
-  <div class="overlay" v-show="browseDropdownOpened" @click="onClickHandler"></div>
+  <Transition name="fade">
+    <div class="overlay" v-show="browseDropdownOpened" @click="onClickHandler"></div>
+  </Transition>
 </template>
 
 <style scoped>
@@ -43,5 +47,20 @@ const onClickHandler = () => {
 .nav-item {
   @apply px-5 py-4 font-main cursor-pointer text-gray-200
   flex items-center gap-1 select-none transition-colors hover:bg-gray-900;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  @apply opacity-0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  @apply opacity-100;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  @apply transition-opacity duration-200;
 }
 </style>
