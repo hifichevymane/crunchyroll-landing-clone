@@ -54,9 +54,11 @@ const onNextBtnClick = () => {
         />
       </svg>
     </button>
-    <li v-for="(slide, key) in slides" :key="key" v-show="key === activeSlideIdx">
-      <img :src="slide.src" :alt="slide.alt" />
-    </li>
+    <TransitionGroup name="slides">
+      <li v-for="(slide, key) in slides" :key="key" v-show="key === activeSlideIdx">
+        <img :src="slide.src" :alt="slide.alt" />
+      </li>
+    </TransitionGroup>
   </ul>
 </template>
 
@@ -66,11 +68,11 @@ const onNextBtnClick = () => {
 }
 
 .carousel li {
-  @apply absolute inset-0;
+  @apply absolute inset-0 -z-10;
 }
 
 .carousel img {
-  @apply w-full h-full object-cover object-center absolute -z-10;
+  @apply w-full h-full object-cover object-center absolute;
 }
 
 .next-btn svg {
@@ -79,7 +81,7 @@ const onNextBtnClick = () => {
 
 .back-btn,
 .next-btn {
-  @apply absolute z-10 top-1/2 -translate-y-1/2 text-white p-5 hover:text-gray-300;
+  @apply absolute z-0 top-1/2 -translate-y-1/2 text-white p-5 hover:text-gray-300;
 }
 
 .next-btn {
@@ -88,5 +90,18 @@ const onNextBtnClick = () => {
 
 svg {
   @apply w-[20px] h-[40px];
+}
+
+.slides-enter-from {
+  @apply brightness-[0.2];
+}
+
+.slides-enter-to {
+  @apply brightness-100;
+}
+
+.slides-enter-active,
+.slides-leave-active {
+  @apply transition-all duration-500;
 }
 </style>
