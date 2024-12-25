@@ -1,9 +1,13 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
+import ImageCarousel from './components/ImageCarousel.vue'
 </script>
 
 <template>
-  <NavBar />
+  <main>
+    <NavBar />
+    <ImageCarousel />
+  </main>
 </template>
 
 <style scoped></style>
