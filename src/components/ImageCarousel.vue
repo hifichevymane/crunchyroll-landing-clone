@@ -19,7 +19,7 @@ const slides = ref([
 
 const onBackBtnClick = () => {
   if (activeSlideIdx.value > 0) {
-    activeSlideIdx.value = activeSlideIdx.value - 1
+    activeSlideIdx.value--
   } else {
     activeSlideIdx.value = slides.value.length - 1
   }
@@ -27,7 +27,7 @@ const onBackBtnClick = () => {
 
 const onNextBtnClick = () => {
   if (activeSlideIdx.value < slides.value.length - 1) {
-    activeSlideIdx.value = activeSlideIdx.value + 1
+    activeSlideIdx.value++
   } else {
     activeSlideIdx.value = 0
   }
