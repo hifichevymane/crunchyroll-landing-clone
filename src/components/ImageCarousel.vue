@@ -81,7 +81,8 @@ const onNextBtnClick = () => {
 
 .back-btn,
 .next-btn {
-  @apply absolute z-0 top-1/2 -translate-y-1/2 text-white p-5 hover:text-gray-300;
+  @apply absolute z-0 top-1/2 -translate-y-1/2
+  text-white p-5 hover:text-gray-400 transition-colors duration-300;
 }
 
 .next-btn {
@@ -92,8 +93,13 @@ svg {
   @apply w-[20px] h-[40px];
 }
 
+.slides-leave-from,
 .slides-enter-from {
   @apply brightness-[0.2];
+}
+
+.slides-leave-from {
+  @apply delay-100;
 }
 
 .slides-enter-to {
@@ -102,6 +108,6 @@ svg {
 
 .slides-enter-active,
 .slides-leave-active {
-  @apply transition-all duration-500;
+  @apply transition-all duration-700;
 }
 </style>
