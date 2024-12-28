@@ -142,12 +142,17 @@ const onNextBtnClick = () => {
 }
 
 .start-watching-btn {
-  @apply bg-orange-500 px-5 font-medium flex gap-2 items-center;
+  @apply bg-orange-500 px-5 font-medium
+  flex gap-2 items-center text-gray-900
+  hover:bg-orange-400 hover:text-gray-800
+  transition-colors duration-300 ease-out;
 }
 
 .wishlist-btn {
-  @apply border-orange-500 text-orange-500 bg-transparent
-  border-2 p-1;
+  @apply border-orange-500 text-orange-500
+  bg-transparent border-2 p-1
+  hover:border-orange-400 hover:text-orange-400
+  transition-colors duration-300 ease-out;
 }
 
 .wishlist-icon {
