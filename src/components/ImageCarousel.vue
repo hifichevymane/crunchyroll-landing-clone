@@ -134,7 +134,7 @@ const onNextBtnClick = () => {
 }
 
 .slide-description {
-  @apply text-gray-100 mt-5;
+  @apply text-gray-300 mt-5;
 }
 
 .slide-buttons {
