@@ -121,6 +121,9 @@ const onNextBtnClick = () => {
               </svg>
             </button>
           </div>
+          <div class="slide-pagination-buttons">
+            <div v-for="slide in slides" :key="slide.src" class="slide-pagination-btn"></div>
+          </div>
         </div>
       </li>
     </TransitionGroup>
@@ -210,5 +213,15 @@ svg {
 .slides-enter-active,
 .slides-leave-active {
   @apply transition-all duration-700;
+}
+
+.slide-pagination-buttons {
+  @apply flex mt-6 h-3 w-[250px] gap-3;
+}
+
+.slide-pagination-btn {
+  @apply bg-white h-full w-6
+  cursor-pointer rounded-2xl flex-grow
+  hover:bg-orange-500 opacity-80;
 }
 </style>
