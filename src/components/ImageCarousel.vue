@@ -1,7 +1,16 @@
 <script setup>
 import { ref } from 'vue'
+import { useIntervalFn } from '@vueuse/core'
 
 const activeSlideIdx = ref(0)
+const { pause, resume } = useIntervalFn(() => {
+  if (activeSlideIdx.value > 0) {
+    activeSlideIdx.value--
+  } else {
+    activeSlideIdx.value = slides.value.length - 1
+  }
+}, 5000)
+
 const slides = ref([
   {
     src: 'src/assets/img/demon_slayer_season_3_release_slide.webp',
@@ -38,19 +47,23 @@ const slides = ref([
 ])
 
 const onBackBtnClick = () => {
+  pause()
   if (activeSlideIdx.value > 0) {
     activeSlideIdx.value--
   } else {
     activeSlideIdx.value = slides.value.length - 1
   }
+  resume()
 }
 
 const onNextBtnClick = () => {
+  pause()
   if (activeSlideIdx.value < slides.value.length - 1) {
     activeSlideIdx.value++
   } else {
     activeSlideIdx.value = 0
   }
+  resume()
 }
 </script>
 
