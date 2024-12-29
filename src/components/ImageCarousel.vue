@@ -4,10 +4,10 @@ import { useIntervalFn } from '@vueuse/core'
 
 const activeSlideIdx = ref(0)
 const { pause, resume } = useIntervalFn(() => {
-  if (activeSlideIdx.value > 0) {
-    activeSlideIdx.value--
+  if (activeSlideIdx.value < slides.value.length - 1) {
+    activeSlideIdx.value++
   } else {
-    activeSlideIdx.value = slides.value.length - 1
+    activeSlideIdx.value = 0
   }
 }, 5000)
 
