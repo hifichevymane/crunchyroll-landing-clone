@@ -1,8 +1,13 @@
 <script setup>
+import CarouselSlide from './CarouselSlide.vue'
+import slideContent from '../assets/slide-content.json'
+
 import { ref } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 
+const slides = ref(slideContent)
 const activeSlideIdx = ref(0)
+
 const { pause, resume } = useIntervalFn(() => {
   if (activeSlideIdx.value < slides.value.length - 1) {
     activeSlideIdx.value++
@@ -10,41 +15,6 @@ const { pause, resume } = useIntervalFn(() => {
     activeSlideIdx.value = 0
   }
 }, 5000)
-
-const slides = ref([
-  {
-    src: 'src/assets/img/demon_slayer_season_3_release_slide.webp',
-    alt: 'Demon Slayer Anime',
-    logo: 'src/assets/img/Demon-Slayer-Logo.png',
-    description: `
-      After his sister is turned into a demon,
-      Tanjiro Kamado joins the Demon Slayer Corps to save her and fight deadly demons.
-      With stunning animation and an emotional story,
-      Demon Slayer is a powerful tale of courage and family.
-    `,
-  },
-  {
-    src: 'src/assets/img/Jujutsu_Kaisen.webp',
-    alt: 'Jujutsu Kaisen Anime',
-    logo: 'src/assets/img/Jujutsu_Kaisen_logo.png',
-    description: `
-      When high schooler Yuji Itadori swallows a cursed object,
-      he gains extraordinary powers and joins Jujutsu High to battle deadly cursed spirits.
-      With unforgettable characters and intense action,
-      Jujutsu Kaisen delivers a supernatural adventure you won’t want to miss!
-    `,
-  },
-  {
-    src: 'src/assets/img/Anime_BlueLock_Season2KeyArt.jpg',
-    alt: 'Blue Lock Anime',
-    logo: 'src/assets/img/Blue_Lock_Logo.png',
-    description: `
-      Japan’s desire for World Cup glory leads the Japanese Football Association to launch a
-      new rigorous training program to find the national team’s next striker. Three hundred
-      high school players are pitted against each other
-    `,
-  },
-])
 
 const onBackBtnClick = () => {
   pause()
@@ -88,95 +58,22 @@ const onNextBtnClick = () => {
       </svg>
     </button>
     <TransitionGroup name="slides">
-      <li v-for="(slide, key) in slides" :key="key" v-show="key === activeSlideIdx">
-        <img class="image-background" :src="slide.src" :alt="slide.alt" />
-        <div class="slide-content">
-          <img class="anime-logo" :src="slide.logo" alt="Anime Logo" />
-          <p class="slide-description">{{ slide.description }}</p>
-          <div class="slide-buttons">
-            <button class="start-watching-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="m5 3l16 9l-16 9z"
-                />
-              </svg>
-              START WATCHING E1
-            </button>
-            <button class="wishlist-btn">
-              <svg
-                class="wishlist-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M5 21V3h14v18l-7-3zm2-3.05l5-2.15l5 2.15V5H7zM7 5h10z"
-                />
-              </svg>
-            </button>
-          </div>
-          <div class="slide-pagination-buttons">
-            <div v-for="slide in slides" :key="slide.src" class="slide-pagination-btn"></div>
-          </div>
-        </div>
-      </li>
+      <CarouselSlide
+        v-for="(slide, key) in slides"
+        :key="key"
+        v-bind="slide"
+        v-show="key === activeSlideIdx"
+      />
     </TransitionGroup>
+    <div class="slide-pagination-buttons">
+      <div v-for="slide in slides" :key="slide.src" class="slide-pagination-btn"></div>
+    </div>
   </ul>
 </template>
 
 <style scoped>
 .carousel {
   @apply relative h-[700px];
-}
-
-.carousel li {
-  @apply absolute inset-0;
-}
-
-.image-background {
-  @apply w-full h-full object-cover object-center absolute;
-}
-
-.slide-content {
-  @apply relative inset-0 w-[570px] h-full
-  bg-gradient-to-r from-black/100 from-20% via-black/80 via-50% to-transparent
-  flex flex-col items-start justify-center pl-14;
-}
-
-.slide-description {
-  @apply text-gray-300 mt-5;
-}
-
-.slide-buttons {
-  @apply flex gap-3 mt-7;
-}
-
-.start-watching-btn {
-  @apply bg-orange-500 px-5 font-medium
-  flex gap-2 items-center text-gray-900
-  hover:bg-orange-400 hover:text-gray-800
-  transition-colors duration-300 ease-out;
-}
-
-.wishlist-btn {
-  @apply border-orange-500 text-orange-500
-  bg-transparent border-2 p-1
-  hover:border-orange-400 hover:text-orange-400
-  transition-colors duration-300 ease-out;
-}
-
-.wishlist-icon {
-  @apply w-7 h-7;
-}
-
-.anime-logo {
-  @apply w-[200px];
 }
 
 .next-btn svg {
@@ -216,12 +113,14 @@ svg {
 }
 
 .slide-pagination-buttons {
-  @apply flex mt-6 h-3 w-[250px] gap-3;
+  @apply flex mt-6 h-3 w-[250px] gap-3
+  absolute bottom-40 pl-14;
 }
 
 .slide-pagination-btn {
   @apply bg-white h-full w-6
   cursor-pointer rounded-2xl flex-grow
-  hover:bg-orange-500 opacity-80;
+  hover:bg-orange-500 opacity-80
+  transition-colors duration-300;
 }
 </style>
