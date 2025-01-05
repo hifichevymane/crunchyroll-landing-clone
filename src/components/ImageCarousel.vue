@@ -6,14 +6,14 @@ import { ref, watch } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 
 const SHOW_SLIDE_DURATION_MS = 5000
-const SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS = 10
+const SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS = 50
 const PROGRESS_BAR_STEP = (SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS / SHOW_SLIDE_DURATION_MS) * 100
 
 const progressBarWidth = ref(0)
 const slides = ref(slideContent)
 const activeSlideIdx = ref(0)
 
-const { pause, resume } = useIntervalFn(() => {
+const changeSlideInterval = useIntervalFn(() => {
   if (activeSlideIdx.value < slides.value.length - 1) {
     activeSlideIdx.value++
   } else {
@@ -30,27 +30,40 @@ const progressBarInterval = useIntervalFn(() => {
 }, SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS)
 
 const onBackBtnClick = () => {
-  pause()
+  changeSlideInterval.pause()
+
   if (activeSlideIdx.value > 0) {
     activeSlideIdx.value--
   } else {
     activeSlideIdx.value = slides.value.length - 1
   }
-  resume()
+
+  changeSlideInterval.resume()
 }
 
 const onNextBtnClick = () => {
-  pause()
+  changeSlideInterval.pause()
+
   if (activeSlideIdx.value < slides.value.length - 1) {
     activeSlideIdx.value++
   } else {
     activeSlideIdx.value = 0
   }
-  resume()
+
+  changeSlideInterval.resume()
+}
+
+const onSlideBtnClick = (idx) => {
+  activeSlideIdx.value = idx
 }
 
 watch(activeSlideIdx, () => {
+  changeSlideInterval.pause()
+  progressBarInterval.pause()
+
   progressBarWidth.value = 0
+
+  changeSlideInterval.resume()
   progressBarInterval.resume()
 })
 </script>
@@ -84,10 +97,15 @@ watch(activeSlideIdx, () => {
       />
     </TransitionGroup>
     <div class="slide-pagination-buttons">
-      <div v-for="(slide, key) in slides" :key="slide.src" class="slide-pagination-btn">
+      <div
+        v-for="(slide, idx) in slides"
+        :key="idx"
+        class="slide-pagination-btn"
+        @click="onSlideBtnClick(idx)"
+      >
         <div
           class="slide-progress-bar"
-          :style="{ width: key === activeSlideIdx ? `${progressBarWidth}%` : '0%' }"
+          :style="{ width: idx === activeSlideIdx ? `${progressBarWidth}%` : '0%' }"
         ></div>
       </div>
     </div>
@@ -141,9 +159,9 @@ svg {
 }
 
 .slide-pagination-btn {
-  @apply bg-white h-full w-6
+  @apply bg-gray-400/50 h-full w-6
   cursor-pointer rounded-2xl flex-grow
-  hover:bg-orange-500 opacity-80
+  hover:bg-orange-500
   transition-colors duration-300 overflow-hidden;
 }
 
