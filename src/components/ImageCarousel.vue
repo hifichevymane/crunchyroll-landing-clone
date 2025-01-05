@@ -2,9 +2,14 @@
 import CarouselSlide from './CarouselSlide.vue'
 import slideContent from '../assets/slide-content.json'
 
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 
+const SHOW_SLIDE_DURATION_MS = 5000
+const SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS = 10
+const PROGRESS_BAR_STEP = (SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS / SHOW_SLIDE_DURATION_MS) * 100
+
+const progressBarWidth = ref(0)
 const slides = ref(slideContent)
 const activeSlideIdx = ref(0)
 
@@ -14,7 +19,15 @@ const { pause, resume } = useIntervalFn(() => {
   } else {
     activeSlideIdx.value = 0
   }
-}, 5000)
+}, SHOW_SLIDE_DURATION_MS)
+
+const progressBarInterval = useIntervalFn(() => {
+  progressBarWidth.value += PROGRESS_BAR_STEP
+  if (progressBarWidth.value > 100) {
+    progressBarWidth.value = 100
+    progressBarInterval.pause()
+  }
+}, SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS)
 
 const onBackBtnClick = () => {
   pause()
@@ -35,6 +48,11 @@ const onNextBtnClick = () => {
   }
   resume()
 }
+
+watch(activeSlideIdx, () => {
+  progressBarWidth.value = 0
+  progressBarInterval.resume()
+})
 </script>
 
 <template>
@@ -66,7 +84,12 @@ const onNextBtnClick = () => {
       />
     </TransitionGroup>
     <div class="slide-pagination-buttons">
-      <div v-for="slide in slides" :key="slide.src" class="slide-pagination-btn"></div>
+      <div v-for="(slide, key) in slides" :key="slide.src" class="slide-pagination-btn">
+        <div
+          class="slide-progress-bar"
+          :style="{ width: key === activeSlideIdx ? `${progressBarWidth}%` : '0%' }"
+        ></div>
+      </div>
     </div>
   </ul>
 </template>
@@ -121,6 +144,10 @@ svg {
   @apply bg-white h-full w-6
   cursor-pointer rounded-2xl flex-grow
   hover:bg-orange-500 opacity-80
-  transition-colors duration-300;
+  transition-colors duration-300 overflow-hidden;
+}
+
+.slide-progress-bar {
+  @apply w-0 h-[100%] bg-orange-500 rounded-2xl;
 }
 </style>
