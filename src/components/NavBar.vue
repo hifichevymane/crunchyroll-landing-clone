@@ -169,7 +169,7 @@ const onTrialPremiumMouseOut = () => {
 
 <style scoped>
 .overlay {
-  @apply fixed top-0 right-0 left-0 bottom-0 z-0 w-full h-full bg-gray-950/80;
+  @apply fixed top-0 right-0 left-0 bottom-0 z-20 w-full h-full bg-gray-950/80;
 }
 
 .navbar {
