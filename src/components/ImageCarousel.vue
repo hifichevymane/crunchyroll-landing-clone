@@ -101,6 +101,7 @@ watch(activeSlideIdx, () => {
         v-for="(slide, idx) in slides"
         :key="idx"
         class="slide-pagination-btn"
+        :class="{ 'active-slide-pagination-btn': idx === activeSlideIdx }"
         @click="onSlideBtnClick(idx)"
       >
         <div
@@ -155,14 +156,18 @@ svg {
 
 .slide-pagination-buttons {
   @apply flex mt-6 h-3 w-[250px] gap-3
-  absolute bottom-40 pl-14;
+  absolute bottom-32 pl-14;
 }
 
 .slide-pagination-btn {
   @apply bg-gray-400/50 h-full w-6
   cursor-pointer rounded-2xl flex-grow
-  hover:bg-orange-500
+  hover:bg-orange-800
   transition-colors duration-300 overflow-hidden;
+}
+
+.active-slide-pagination-btn {
+  @apply hover:bg-orange-500;
 }
 
 .slide-progress-bar {
