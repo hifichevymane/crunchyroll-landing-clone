@@ -8,13 +8,15 @@ import slideContent from '../assets/slide-content.json'
 import { ref, watch } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 
-const SHOW_SLIDE_DURATION_MS = 5000
+const SLIDE_DURATION_MS = 5000
 const SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS = 50
-const PROGRESS_BAR_STEP = (SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS / SHOW_SLIDE_DURATION_MS) * 100
+const PROGRESS_BAR_STEP = (SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS / SLIDE_DURATION_MS) * 100
 
+const slideDurationMs = ref(SLIDE_DURATION_MS)
 const progressBarWidth = ref(0)
 const slides = ref(slideContent)
 const activeSlideIdx = ref(0)
+const startTime = ref(Date.now())
 
 const changeSlideInterval = useIntervalFn(() => {
   if (activeSlideIdx.value < slides.value.length - 1) {
@@ -22,7 +24,7 @@ const changeSlideInterval = useIntervalFn(() => {
   } else {
     activeSlideIdx.value = 0
   }
-}, SHOW_SLIDE_DURATION_MS)
+}, slideDurationMs)
 
 const progressBarInterval = useIntervalFn(() => {
   progressBarWidth.value += PROGRESS_BAR_STEP
@@ -60,10 +62,27 @@ const onSlideBtnClick = (idx) => {
   activeSlideIdx.value = idx
 }
 
+const onSlideBtnMouseOver = () => {
+  const elapsedTime = Date.now() - startTime.value
+  slideDurationMs.value = SLIDE_DURATION_MS - elapsedTime
+  console.log(elapsedTime)
+  console.log(slideDurationMs.value)
+
+  changeSlideInterval.pause()
+  progressBarInterval.pause()
+}
+
+const onSlideBtnMouseOut = () => {
+  changeSlideInterval.resume()
+  progressBarInterval.resume()
+}
+
 watch(activeSlideIdx, () => {
   changeSlideInterval.pause()
   progressBarInterval.pause()
 
+  startTime.value = Date.now()
+  slideDurationMs.value = SLIDE_DURATION_MS
   progressBarWidth.value = 0
 
   changeSlideInterval.resume()
@@ -90,6 +109,8 @@ watch(activeSlideIdx, () => {
         class="slide-pagination-btn"
         :class="{ 'active-slide-pagination-btn': idx === activeSlideIdx }"
         @click="onSlideBtnClick(idx)"
+        @mouseover="onSlideBtnMouseOver"
+        @mouseout="onSlideBtnMouseOut"
       >
         <div
           class="slide-progress-bar"
