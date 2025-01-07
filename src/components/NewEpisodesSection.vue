@@ -48,7 +48,7 @@
     <div class="episodes-section">
       <h3 class="episodes-section-heading">Yesterday</h3>
     </div>
-    <button>SHOW MORE</button>
+    <button class="show-more-btn">SHOW MORE</button>
   </section>
 </template>
 
@@ -86,5 +86,10 @@ section {
 
 .episodes-section-heading {
   @apply text-2xl border-b-2 pb-1 border-gray-500;
+}
+
+.show-more-btn {
+  @apply bg-cyan-900/70 w-full font-semibold py-2 mt-14
+  hover:bg-cyan-900 transition-colors duration-300;
 }
 </style>
