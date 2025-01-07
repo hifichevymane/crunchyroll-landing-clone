@@ -1,9 +1,21 @@
 <script setup>
 const props = defineProps({
-  src: String,
-  alt: String,
-  logo: String,
-  description: String,
+  src: {
+    type: String,
+    required: true,
+  },
+  alt: {
+    type: String,
+    required: true,
+  },
+  logo: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
 })
 </script>
 
