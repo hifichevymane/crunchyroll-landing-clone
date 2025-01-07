@@ -8,15 +8,14 @@ import slideContent from '../assets/slide-content.json'
 import { ref, watch } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
 
-const SLIDE_DURATION_MS = 5000
+const INIT_SLIDE_DURATION_MS = 5000
 const SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS = 50
-const PROGRESS_BAR_STEP = (SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS / SLIDE_DURATION_MS) * 100
+const PROGRESS_BAR_STEP = (SLIDE_PROGRESS_BAR_UPDATE_INTERVAL_MS / INIT_SLIDE_DURATION_MS) * 100
 
-const slideDurationMs = ref(SLIDE_DURATION_MS)
+const slideDurationMs = ref(INIT_SLIDE_DURATION_MS)
 const progressBarWidth = ref(0)
 const slides = ref(slideContent)
 const activeSlideIdx = ref(0)
-const startTime = ref(Date.now())
 
 const changeSlideInterval = useIntervalFn(() => {
   if (activeSlideIdx.value < slides.value.length - 1) {
@@ -58,18 +57,12 @@ const onNextBtnClick = () => {
   changeSlideInterval.resume()
 }
 
-const onSlideBtnClick = (idx) => {
-  activeSlideIdx.value = idx
-}
-
 const onSlideBtnMouseOver = () => {
-  const elapsedTime = Date.now() - startTime.value
-  slideDurationMs.value = SLIDE_DURATION_MS - elapsedTime
-  console.log(elapsedTime)
-  console.log(slideDurationMs.value)
-
   changeSlideInterval.pause()
   progressBarInterval.pause()
+
+  const elapsedTime = INIT_SLIDE_DURATION_MS * (progressBarWidth.value / 100)
+  slideDurationMs.value = INIT_SLIDE_DURATION_MS - elapsedTime
 }
 
 const onSlideBtnMouseOut = () => {
@@ -78,15 +71,8 @@ const onSlideBtnMouseOut = () => {
 }
 
 watch(activeSlideIdx, () => {
-  changeSlideInterval.pause()
-  progressBarInterval.pause()
-
-  startTime.value = Date.now()
-  slideDurationMs.value = SLIDE_DURATION_MS
+  slideDurationMs.value = INIT_SLIDE_DURATION_MS
   progressBarWidth.value = 0
-
-  changeSlideInterval.resume()
-  progressBarInterval.resume()
 })
 </script>
 
@@ -108,7 +94,7 @@ watch(activeSlideIdx, () => {
         :key="idx"
         class="slide-pagination-btn"
         :class="{ 'active-slide-pagination-btn': idx === activeSlideIdx }"
-        @click="onSlideBtnClick(idx)"
+        @click="activeSlideIdx = idx"
         @mouseover="onSlideBtnMouseOver"
         @mouseout="onSlideBtnMouseOut"
       >
