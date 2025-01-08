@@ -1,4 +1,41 @@
-<script setup></script>
+<script setup>
+import NewEpisodeCard from './NewEpisodeCard.vue'
+
+const episodes = [
+  {
+    title: 'Naruto',
+    episodeNumber: 24,
+    duration: '23:01',
+  },
+  {
+    title: 'Naruto',
+    episodeNumber: 24,
+    duration: '23:01',
+  },
+  {
+    title: 'Naruto',
+    episodeNumber: 24,
+    duration: '23:01',
+    dubbing: true,
+  },
+  {
+    title: 'Naruto',
+    episodeNumber: 24,
+    duration: '23:01',
+  },
+  {
+    title: 'Naruto',
+    episodeNumber: 24,
+    duration: '23:01',
+    dubbing: true,
+  },
+  {
+    title: 'Naruto',
+    episodeNumber: 24,
+    duration: '23:01',
+  },
+]
+</script>
 
 <template>
   <section>
@@ -44,9 +81,15 @@
     </div>
     <div class="episodes-section">
       <h3 class="episodes-section-heading">Today</h3>
+      <div class="episode-list">
+        <NewEpisodeCard v-for="(episode, idx) in episodes" :key="idx" v-bind="episode" />
+      </div>
     </div>
     <div class="episodes-section">
       <h3 class="episodes-section-heading">Yesterday</h3>
+      <div class="episode-list">
+        <NewEpisodeCard v-for="(episode, idx) in episodes" :key="idx" v-bind="episode" />
+      </div>
     </div>
     <button class="show-more-btn">SHOW MORE</button>
   </section>
@@ -85,11 +128,15 @@ section {
 }
 
 .episodes-section-heading {
-  @apply text-2xl border-b-2 pb-1 border-gray-500;
+  @apply text-2xl border-b-2 pb-1 mb-3 border-gray-500;
 }
 
 .show-more-btn {
   @apply bg-cyan-900/70 w-full font-semibold py-2 mt-14
   hover:bg-cyan-900 transition-colors duration-300;
+}
+
+.episode-list {
+  @apply grid grid-cols-3 gap-x-4 gap-y-2;
 }
 </style>
