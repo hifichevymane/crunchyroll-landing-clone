@@ -21,6 +21,7 @@ const props = defineProps({
 
 <template>
   <div class="card">
+    <a href="#" class="episode-link"></a>
     <div class="episode-image"></div>
     <div class="episode-info">
       <h4 class="episode-title">{{ props.title }}</h4>
@@ -37,7 +38,8 @@ const props = defineProps({
 .card {
   @apply w-full h-[82px] flex gap-3
   bg-black hover:bg-gray-500/20
-  cursor-pointer transition-colors duration-200;
+  transition-colors duration-200
+  relative;
 }
 
 .episode-image {
@@ -63,5 +65,9 @@ const props = defineProps({
 
 .episode-type-duration-wrapper {
   @apply flex justify-between w-full items-center mt-[2px];
+}
+
+.episode-link {
+  @apply absolute w-full h-full;
 }
 </style>
