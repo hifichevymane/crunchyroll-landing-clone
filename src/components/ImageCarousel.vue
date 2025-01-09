@@ -77,34 +77,36 @@ watch(activeSlideIdx, () => {
 </script>
 
 <template>
-  <ul class="carousel">
-    <PreviousSlideBtn @click="onBackBtnClick" />
-    <NextSlideBtn @click="onNextBtnClick" />
-    <TransitionGroup name="slides">
-      <CarouselSlide
-        v-for="(slide, key) in slides"
-        :key="key"
-        v-bind="slide"
-        v-show="key === activeSlideIdx"
-      />
-    </TransitionGroup>
-    <div class="slide-pagination-buttons">
-      <div
-        v-for="(slide, idx) in slides"
-        :key="idx"
-        class="slide-pagination-btn"
-        :class="{ 'active-slide-pagination-btn': idx === activeSlideIdx }"
-        @click="activeSlideIdx = idx"
-        @mouseover="onSlideBtnMouseOver"
-        @mouseout="onSlideBtnMouseOut"
-      >
+  <section>
+    <ul class="carousel">
+      <PreviousSlideBtn @click="onBackBtnClick" />
+      <NextSlideBtn @click="onNextBtnClick" />
+      <TransitionGroup name="slides">
+        <CarouselSlide
+          v-for="(slide, key) in slides"
+          :key="key"
+          v-bind="slide"
+          v-show="key === activeSlideIdx"
+        />
+      </TransitionGroup>
+      <div class="slide-pagination-buttons">
         <div
-          class="slide-progress-bar"
-          :style="{ width: idx === activeSlideIdx ? `${progressBarWidth}%` : '0%' }"
-        ></div>
+          v-for="(slide, idx) in slides"
+          :key="idx"
+          class="slide-pagination-btn"
+          :class="{ 'active-slide-pagination-btn': idx === activeSlideIdx }"
+          @click="activeSlideIdx = idx"
+          @mouseover="onSlideBtnMouseOver"
+          @mouseout="onSlideBtnMouseOut"
+        >
+          <div
+            class="slide-progress-bar"
+            :style="{ width: idx === activeSlideIdx ? `${progressBarWidth}%` : '0%' }"
+          ></div>
+        </div>
       </div>
-    </div>
-  </ul>
+    </ul>
+  </section>
 </template>
 
 <style scoped>
