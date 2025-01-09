@@ -27,7 +27,7 @@ const props = defineProps({
         <img class="logo" :src="props.logo" alt="Anime Logo" />
         <p class="slide-description">{{ props.description }}</p>
         <div class="slide-buttons">
-          <button class="start-watching-btn">
+          <a href="#" class="start-watching-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path
                 fill="none"
@@ -38,7 +38,7 @@ const props = defineProps({
               />
             </svg>
             START WATCHING E1
-          </button>
+          </a>
           <button class="wishlist-btn">
             <svg
               class="wishlist-icon"
