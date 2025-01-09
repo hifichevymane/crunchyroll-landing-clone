@@ -12,6 +12,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  previewImgSrc: {
+    type: String,
+    required: true,
+  },
   dubbing: {
     type: Boolean,
     required: false,
@@ -22,7 +26,7 @@ const props = defineProps({
 <template>
   <div class="card">
     <a href="#" class="episode-link"></a>
-    <div class="episode-image"></div>
+    <img class="episode-image" :src="props.previewImgSrc" alt="Episode Preview" />
     <div class="episode-info">
       <h4 class="episode-title">{{ props.title }}</h4>
       <span class="episode-number">Episode {{ props.episodeNumber }}</span>

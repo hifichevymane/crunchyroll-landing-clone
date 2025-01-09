@@ -6,32 +6,38 @@ const episodes = [
     title: 'Naruto',
     episodeNumber: 24,
     duration: '23:01',
+    previewImgSrc: '/src/assets/img/Naruto.webp',
   },
   {
     title: 'Naruto',
     episodeNumber: 24,
     duration: '23:01',
+    previewImgSrc: '/src/assets/img/Naruto.webp',
   },
   {
     title: 'Naruto',
     episodeNumber: 24,
     duration: '23:01',
+    previewImgSrc: '/src/assets/img/Naruto.webp',
     dubbing: true,
   },
   {
     title: 'Naruto',
     episodeNumber: 24,
     duration: '23:01',
+    previewImgSrc: '/src/assets/img/Naruto.webp',
   },
   {
     title: 'Naruto',
     episodeNumber: 24,
     duration: '23:01',
+    previewImgSrc: '/src/assets/img/Naruto.webp',
     dubbing: true,
   },
   {
     title: 'Naruto',
     episodeNumber: 24,
+    previewImgSrc: '/src/assets/img/Naruto.webp',
     duration: '23:01',
   },
 ]
