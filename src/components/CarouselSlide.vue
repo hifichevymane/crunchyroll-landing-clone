@@ -23,32 +23,34 @@ const props = defineProps({
   <li>
     <img class="image-background" :src="props.src" :alt="props.alt" />
     <div class="slide-content">
-      <img class="logo" :src="props.logo" alt="Anime Logo" />
-      <p class="slide-description">{{ props.description }}</p>
-      <div class="slide-buttons">
-        <button class="start-watching-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              d="m5 3l16 9l-16 9z"
-            />
-          </svg>
-          START WATCHING E1
-        </button>
-        <button class="wishlist-btn">
-          <svg
-            class="wishlist-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path fill="currentColor" d="M5 21V3h14v18l-7-3zm2-3.05l5-2.15l5 2.15V5H7zM7 5h10z" />
-          </svg>
-        </button>
+      <div class="wrapper">
+        <img class="logo" :src="props.logo" alt="Anime Logo" />
+        <p class="slide-description">{{ props.description }}</p>
+        <div class="slide-buttons">
+          <button class="start-watching-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="m5 3l16 9l-16 9z"
+              />
+            </svg>
+            START WATCHING E1
+          </button>
+          <button class="wishlist-btn">
+            <svg
+              class="wishlist-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path fill="currentColor" d="M5 21V3h14v18l-7-3zm2-3.05l5-2.15l5 2.15V5H7zM7 5h10z" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </li>
@@ -64,7 +66,7 @@ li {
 }
 
 .slide-content {
-  @apply relative inset-0 w-[570px] h-full
+  @apply relative inset-0 w-[870px] h-full
   bg-gradient-to-r from-black/100 from-20% via-black/80 via-50% to-transparent
   flex flex-col items-start justify-center pl-14;
 }
@@ -97,5 +99,9 @@ li {
 
 .wishlist-icon {
   @apply w-7 h-7;
+}
+
+.wrapper {
+  @apply w-1/2;
 }
 </style>
