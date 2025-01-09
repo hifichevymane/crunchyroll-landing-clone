@@ -47,7 +47,7 @@ const props = defineProps({
 }
 
 .episode-image {
-  @apply w-[145px] h-full bg-white shrink-0;
+  @apply w-[145px] h-full bg-white shrink-0 object-cover;
 }
 
 .episode-info {
