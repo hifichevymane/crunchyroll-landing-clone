@@ -168,6 +168,10 @@ const onTrialPremiumMouseOut = () => {
 </template>
 
 <style scoped>
+nav {
+  @apply sticky top-0 z-50;
+}
+
 .overlay {
   @apply fixed top-0 right-0 left-0 bottom-0 z-20 w-full h-full bg-gray-950/80;
 }
