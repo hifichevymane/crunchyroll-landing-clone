@@ -1,6 +1,8 @@
 <script setup>
 import NewEpisodeCard from './NewEpisodeCard.vue'
 
+import { ref } from 'vue'
+
 const episodes = [
   {
     title: 'Naruto',
@@ -41,6 +43,7 @@ const episodes = [
     duration: '23:01',
   },
 ]
+const isSectionExpanded = ref(false)
 </script>
 
 <template>
@@ -85,19 +88,33 @@ const episodes = [
         </svg>
       </a>
     </div>
-    <div class="episodes-section">
-      <h3 class="episodes-section-heading">Today</h3>
-      <div class="episode-list">
-        <NewEpisodeCard v-for="(episode, idx) in episodes" :key="idx" v-bind="episode" />
+    <div class="episodes-section-wrapper" :class="isSectionExpanded && 'section-expanded'">
+      <div class="episodes-section">
+        <h3 class="episodes-section-heading">Today</h3>
+        <div class="episode-list">
+          <NewEpisodeCard v-for="(episode, idx) in episodes" :key="idx" v-bind="episode" />
+        </div>
+      </div>
+      <div class="episodes-section">
+        <h3 class="episodes-section-heading">Yesterday</h3>
+        <div class="episode-list">
+          <NewEpisodeCard v-for="(episode, idx) in episodes" :key="idx" v-bind="episode" />
+        </div>
+      </div>
+      <div class="episodes-section">
+        <h3 class="episodes-section-heading">Tuesday</h3>
+        <div class="episode-list">
+          <NewEpisodeCard v-for="(episode, idx) in episodes" :key="idx" v-bind="episode" />
+        </div>
       </div>
     </div>
-    <div class="episodes-section">
-      <h3 class="episodes-section-heading">Yesterday</h3>
-      <div class="episode-list">
-        <NewEpisodeCard v-for="(episode, idx) in episodes" :key="idx" v-bind="episode" />
-      </div>
-    </div>
-    <button class="show-more-btn">SHOW MORE</button>
+    <button class="action-btn" v-if="!isSectionExpanded" @click="isSectionExpanded = true">
+      SHOW MORE
+    </button>
+    <button class="action-btn" v-if="isSectionExpanded">
+      <a href="#"></a>
+      VIEW RELEASE CALENDAR
+    </button>
   </section>
 </template>
 
@@ -137,12 +154,24 @@ section {
   @apply text-2xl border-b-2 pb-1 mb-3 border-gray-500;
 }
 
-.show-more-btn {
+.action-btn {
   @apply bg-cyan-900/70 w-full font-semibold py-2 mt-14
-  hover:bg-cyan-900 transition-colors duration-300;
+  hover:bg-cyan-900 transition-colors duration-300 relative;
+}
+
+.action-btn a {
+  @apply absolute w-full h-full inset-0;
 }
 
 .episode-list {
   @apply grid grid-cols-3 gap-x-4 gap-y-2;
+}
+
+.episodes-section-wrapper {
+  @apply overflow-hidden max-h-[398px];
+}
+
+.section-expanded {
+  @apply max-h-full;
 }
 </style>
