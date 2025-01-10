@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue'
+
 const props = defineProps({
   src: {
     type: String,
@@ -16,7 +18,23 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  ageRating: {
+    type: Number,
+    required: true,
+  },
+  dubbing: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
+  genres: {
+    type: Array,
+    default: () => [],
+    required: false,
+  },
 })
+
+const genres = computed(() => props.genres.join(', '))
 </script>
 
 <template>
@@ -25,6 +43,13 @@ const props = defineProps({
     <div class="slide-content">
       <div class="wrapper">
         <img class="logo" :src="props.logo" alt="Anime Logo" />
+        <div class="tags">
+          <div class="age-rating">
+            <span>{{ ageRating }}+</span>
+          </div>
+          <span class="tag">{{ dubbing ? 'Sub | Dub' : 'Subtitled' }}</span>
+          <span class="tag">{{ genres }}</span>
+        </div>
         <p class="slide-description">{{ props.description }}</p>
         <div class="slide-buttons">
           <a href="#" class="start-watching-btn">
@@ -76,7 +101,7 @@ li {
 }
 
 .slide-description {
-  @apply text-gray-300 mt-5 overflow-hidden max-h-[96px];
+  @apply text-gray-300 mt-2 overflow-hidden max-h-[96px];
 }
 
 .slide-buttons {
@@ -103,5 +128,17 @@ li {
 
 .wrapper {
   @apply w-1/2;
+}
+
+.tags {
+  @apply flex items-center gap-1 text-gray-300 mt-2 font-bold;
+}
+
+.age-rating {
+  @apply py-[.5px] px-1 bg-gray-400/40;
+}
+
+.tag {
+  @apply before:content-['•_'];
 }
 </style>
