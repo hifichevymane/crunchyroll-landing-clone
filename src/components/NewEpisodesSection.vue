@@ -120,7 +120,7 @@ const isSectionExpanded = ref(false)
 
 <style scoped>
 section {
-  @apply text-gray-50 px-12 mt-5;
+  @apply text-gray-50 px-12 mt-5 pb-14;
 }
 
 .header {
