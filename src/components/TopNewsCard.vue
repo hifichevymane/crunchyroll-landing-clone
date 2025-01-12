@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { formatDate } from '@/utils'
 
 const props = defineProps({
   imgSrc: {
@@ -25,18 +26,7 @@ const props = defineProps({
   },
 })
 
-const parsedData = computed(() => {
-  const formatObject = Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit',
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-    timeZoneName: 'short',
-  })
-  return formatObject.format(props.date)
-})
+const parsedData = computed(() => formatDate(props.date))
 </script>
 
 <template>
