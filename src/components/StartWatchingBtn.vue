@@ -20,6 +20,7 @@ a {
   @apply bg-orange-500 px-5 font-semibold
   flex gap-2 items-center text-gray-900
   hover:bg-orange-400 hover:text-gray-800
-  transition-colors duration-300 ease-out h-[40px] w-[240px];
+  transition-colors duration-300 ease-out h-[40px] w-[240px]
+  uppercase;
 }
 </style>
