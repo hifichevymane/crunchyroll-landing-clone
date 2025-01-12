@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue'
+
 const props = defineProps({
   imgSrc: {
     type: String,
@@ -22,6 +24,19 @@ const props = defineProps({
     required: true,
   },
 })
+
+const parsedData = computed(() => {
+  const formatObject = Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+    timeZoneName: 'short',
+  })
+  return formatObject.format(props.date)
+})
 </script>
 
 <template>
@@ -29,7 +44,7 @@ const props = defineProps({
     <a href="#"></a>
     <img :src="props.imgSrc" :alt="props.imgAlt" />
     <h5>{{ props.header }}</h5>
-    <span class="date">{{ props.date }}</span>
+    <span class="date">{{ parsedData }}</span>
     <span class="author">by {{ props.author }}</span>
   </div>
 </template>
