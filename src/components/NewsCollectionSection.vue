@@ -109,11 +109,11 @@ const LATEST_NEWS = [
         </a>
       </div>
       <div class="content">
-        <div class="top-news">
+        <div class="news-category-section">
           <h4>Top News</h4>
           <TopNewsCard v-for="(item, idx) in TOP_NEWS" :key="idx" v-bind="item" />
         </div>
-        <div class="latest-news">
+        <div class="news-category-section">
           <h4>Latest</h4>
           <LatestNewsCard v-for="(item, idx) in LATEST_NEWS" :key="idx" v-bind="item" />
         </div>
@@ -163,11 +163,7 @@ h4 {
   mt-5 gap-5;
 }
 
-.top-news {
-  @apply flex flex-col gap-3;
-}
-
-.latest-news {
+.news-category-section {
   @apply flex flex-col gap-3;
 }
 </style>
