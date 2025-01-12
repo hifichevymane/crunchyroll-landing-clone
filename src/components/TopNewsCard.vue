@@ -1,12 +1,36 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+  imgSrc: {
+    type: String,
+    required: true,
+  },
+  imgAlt: {
+    type: String,
+    default: 'Anime Top News',
+    required: false,
+  },
+  header: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  author: {
+    type: String,
+    required: true,
+  },
+})
+</script>
 
 <template>
   <div class="card">
     <a href="#"></a>
-    <img src="/src/assets/img/news-img-1.jpeg" alt="News Image" />
-    <h5>Here’s the Exact Time The Apothecary Diaries Season 2 Premieres on Crunchyroll</h5>
-    <span class="date">date</span>
-    <span class="author">by John Doe</span>
+    <img :src="props.imgSrc" :alt="props.imgAlt" />
+    <h5>{{ props.header }}</h5>
+    <span class="date">{{ props.date }}</span>
+    <span class="author">by {{ props.author }}</span>
   </div>
 </template>
 

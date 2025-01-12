@@ -1,5 +1,22 @@
 <script setup>
 import TopNewsCard from './TopNewsCard.vue'
+
+const TOP_NEWS = [
+  {
+    imgSrc: '/src/assets/img/news-img-1.jpeg',
+    imgAlt: 'Pizdec',
+    header: 'Here’s the Exact Time The Apothecary Diaries Season 2 Premieres on Crunchyroll',
+    date: new Date(),
+    author: 'John Doe',
+  },
+  {
+    imgSrc: '/src/assets/img/news-img-1.jpeg',
+    imgAlt: 'Pizdec',
+    header: 'Here’s the Exact Time The Apothecary Diaries Season 2 Premieres on Crunchyroll',
+    date: new Date(),
+    author: 'John Doe',
+  },
+]
 </script>
 
 <template>
@@ -48,8 +65,7 @@ import TopNewsCard from './TopNewsCard.vue'
       <div class="content">
         <div class="top-news">
           <h4>Top News</h4>
-          <TopNewsCard />
-          <TopNewsCard />
+          <TopNewsCard v-for="(item, idx) in TOP_NEWS" :key="idx" v-bind="item" />
         </div>
         <div class="latest-news">
           <h4>Latest</h4>
