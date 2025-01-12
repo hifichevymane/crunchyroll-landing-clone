@@ -1,5 +1,6 @@
 <script setup>
 import TopNewsCard from './TopNewsCard.vue'
+import LatestNewsCard from './LatestNewsCard.vue'
 
 const TOP_NEWS = [
   {
@@ -13,6 +14,51 @@ const TOP_NEWS = [
     imgSrc: '/src/assets/img/news-img-1.jpeg',
     imgAlt: 'Pizdec',
     header: 'Here’s the Exact Time The Apothecary Diaries Season 2 Premieres on Crunchyroll',
+    date: new Date(),
+    author: 'John Doe',
+  },
+]
+
+const LATEST_NEWS = [
+  {
+    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgAlt: 'Solo Leveling News',
+    header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
+    date: new Date(),
+    author: 'John Doe',
+  },
+  {
+    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgAlt: 'Solo Leveling News',
+    header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
+    date: new Date(),
+    author: 'John Doe',
+  },
+  {
+    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgAlt: 'Solo Leveling News',
+    header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
+    date: new Date(),
+    author: 'John Doe',
+  },
+  {
+    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgAlt: 'Solo Leveling News',
+    header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
+    date: new Date(),
+    author: 'John Doe',
+  },
+  {
+    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgAlt: 'Solo Leveling News',
+    header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
+    date: new Date(),
+    author: 'John Doe',
+  },
+  {
+    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgAlt: 'Solo Leveling News',
+    header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
     date: new Date(),
     author: 'John Doe',
   },
@@ -69,6 +115,7 @@ const TOP_NEWS = [
         </div>
         <div class="latest-news">
           <h4>Latest</h4>
+          <LatestNewsCard v-for="(item, idx) in LATEST_NEWS" :key="idx" v-bind="item" />
         </div>
       </div>
     </div>
@@ -117,6 +164,10 @@ h4 {
 }
 
 .top-news {
+  @apply flex flex-col gap-3;
+}
+
+.latest-news {
   @apply flex flex-col gap-3;
 }
 </style>
