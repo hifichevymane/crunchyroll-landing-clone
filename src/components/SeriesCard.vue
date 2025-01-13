@@ -1,25 +1,46 @@
 <script setup>
 import StartWatchingBtn from './StartWatchingBtn.vue'
+
+const props = defineProps({
+  seriesName: {
+    type: String,
+    required: true,
+  },
+  dubbing: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  imgSrc: {
+    type: String,
+    required: true,
+  },
+  imgAlt: {
+    type: String,
+    default: 'Series',
+    required: false,
+  },
+})
 </script>
 
 <template>
   <div class="series-card">
     <div class="series-image-placeholder">
-      <img src="/src/assets/img/news-img-4.jpeg" alt="Series" />
+      <img :src="imgSrc" :alt="imgAlt" />
       <div class="series-overlay">
         <a href="#">To series</a>
       </div>
     </div>
     <div class="series-description">
       <h2>
-        <a href="#"> JoJo Bizarre Adventure </a>
+        <a href="#">{{ props.seriesName }}</a>
       </h2>
-      <span>Subtitled</span>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, culpa labore. Fugit id
-        doloribus aspernatur, neque at amet labore, natus dolorem vitae unde minima illo voluptatum
-        aut officia, accusamus voluptatem!
-      </p>
+      <span>{{ props.dubbing ? 'Sub | Dub' : 'Subtitled' }}</span>
+      <p>{{ props.description }}</p>
       <div class="buttons">
         <StartWatchingBtn class="start-watching-btn">START WATCHING E1</StartWatchingBtn>
         <button class="watchlist-btn">
