@@ -151,6 +151,7 @@ a {
 .lang-btn {
   @apply p-3 text-gray-400 font-semibold
   flex gap-2 hover:bg-gray-600 hover:text-gray-50
+  active:bg-gray-600 active:text-gray-50
   transition-colors duration-150;
 }
 
