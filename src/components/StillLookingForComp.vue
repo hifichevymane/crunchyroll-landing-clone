@@ -7,13 +7,14 @@
       <br />
       Check out our full library
     </h3>
-    <button class="emphasized-btn">view all</button>
+    <a href="#" class="emphasized-btn">view all</a>
   </div>
 </template>
 
 <style scoped>
 .still-looking-for-section {
-  @apply flex justify-center items-center mt-[80px];
+  @apply flex justify-center items-center
+  flex-col gap-5 mt-[80px] relative;
 }
 
 .still-looking-for-text {
