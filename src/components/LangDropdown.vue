@@ -1,9 +1,17 @@
 <script setup>
+import { ref } from 'vue'
+
 const DROPDOWN_ID = 'dropdown'
+const popoverOpened = ref(false)
 </script>
 
 <template>
-  <button class="lang-btn" :popovertarget="DROPDOWN_ID">
+  <button
+    class="lang-btn"
+    :class="popoverOpened && 'active-btn'"
+    :popovertarget="DROPDOWN_ID"
+    @click="popoverOpened = !popoverOpened"
+  >
     <svg
       class="dropdown-logo"
       xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +23,7 @@ const DROPDOWN_ID = 'dropdown'
     </svg>
     ENGLISH
   </button>
-  <ul :id="DROPDOWN_ID" class="dropdown" popover>
+  <ul :id="DROPDOWN_ID" class="dropdown" popover="manual">
     <li class="language">Ukrainian</li>
     <li class="language">Russian</li>
     <li class="language active">English</li>
@@ -33,9 +41,11 @@ const DROPDOWN_ID = 'dropdown'
 .lang-btn {
   @apply p-3 text-gray-400 font-semibold
   flex gap-2 hover:bg-gray-800 hover:text-gray-50
-  active:bg-gray-800 active:text-gray-50
-  focus:bg-gray-800 focus:text-gray-50
   transition-colors duration-150;
+}
+
+.active-btn {
+  @apply bg-gray-800 text-gray-50;
 }
 
 .lang-btn {
