@@ -5,6 +5,7 @@ import NewEpisodesSection from './components/NewEpisodesSection.vue'
 import NewsCollectionSection from './components/NewsCollectionSection.vue'
 import SeriesSection from './components/SeriesSection.vue'
 import FooterComp from './components/FooterComp.vue'
+import StillLookingForComp from './components/StillLookingForComp.vue'
 </script>
 
 <template>
@@ -14,6 +15,7 @@ import FooterComp from './components/FooterComp.vue'
     <NewEpisodesSection />
     <NewsCollectionSection />
     <SeriesSection />
+    <StillLookingForComp />
   </main>
   <FooterComp />
 </template>
