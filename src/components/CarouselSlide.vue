@@ -1,4 +1,5 @@
 <script setup>
+import StartWatchingBtn from './StartWatchingBtn.vue'
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -52,18 +53,7 @@ const genres = computed(() => props.genres.join(', '))
         </div>
         <p class="slide-description">{{ props.description }}</p>
         <div class="slide-buttons">
-          <a href="#" class="start-watching-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="m5 3l16 9l-16 9z"
-              />
-            </svg>
-            START WATCHING E1
-          </a>
+          <StartWatchingBtn>Start watching e1</StartWatchingBtn>
           <button class="wishlist-btn">
             <svg
               class="wishlist-icon"
@@ -106,13 +96,6 @@ li {
 
 .slide-buttons {
   @apply flex gap-3 mt-7;
-}
-
-.start-watching-btn {
-  @apply bg-orange-500 px-5 font-medium
-  flex gap-2 items-center text-gray-900
-  hover:bg-orange-400 hover:text-gray-800
-  transition-colors duration-300 ease-out;
 }
 
 .wishlist-btn {
