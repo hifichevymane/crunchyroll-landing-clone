@@ -1,11 +1,13 @@
-<script setup></script>
+<script setup>
+import LangDropdown from './LangDropdown.vue'
+</script>
 
 <template>
   <footer>
     <div class="info-sections-wrapper">
       <div class="info-section">
         <h4>Navigation</h4>
-        <ul>
+        <ul class="info-section-links">
           <li>
             <a href="#">Browse Popular</a>
           </li>
@@ -25,7 +27,7 @@
       </div>
       <div class="info-section">
         <h4>Connect with us</h4>
-        <ul>
+        <ul class="info-section-links">
           <li>
             <a href="#">Youtube</a>
           </li>
@@ -45,7 +47,7 @@
       </div>
       <div class="info-section">
         <h4>Crunchyroll</h4>
-        <ul>
+        <ul class="info-section-links">
           <li>
             <a href="#">Start a free trial</a>
           </li>
@@ -86,7 +88,7 @@
       </div>
       <div class="info-section">
         <h4>Account</h4>
-        <ul>
+        <ul class="info-section-links">
           <li>
             <a href="#">Create account</a>
           </li>
@@ -98,18 +100,7 @@
     </div>
     <div class="legal-section">
       <span class="company-name">© Crunchyroll, LLC</span>
-      <button class="lang-btn">
-        <svg
-          class="dropdown-logo"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-        >
-          <path fill="currentColor" d="m12 15l5-5H7z" />
-        </svg>
-        ENGLISH
-      </button>
+      <LangDropdown />
     </div>
   </footer>
 </template>
@@ -133,7 +124,7 @@ h4 {
   @apply text-lg mb-2;
 }
 
-ul {
+.info-section-links {
   @apply flex flex-col gap-1;
 }
 
@@ -150,7 +141,8 @@ a {
 
 .lang-btn {
   @apply p-3 text-gray-400 font-semibold
-  flex gap-2 hover:bg-gray-600 hover:text-gray-50
+  flex gap-2 hover:bg-gray-800 hover:text-gray-50
+  active:bg-gray-800 active:text-gray-50
   transition-colors duration-150;
 }
 
