@@ -54,7 +54,7 @@ const genres = computed(() => props.genres.join(', '))
         <p class="slide-description">{{ props.description }}</p>
         <div class="slide-buttons">
           <StartWatchingBtn>Start watching e1</StartWatchingBtn>
-          <button class="wishlist-btn">
+          <button class="emphasized-btn">
             <svg
               class="wishlist-icon"
               xmlns="http://www.w3.org/2000/svg"
@@ -98,11 +98,8 @@ li {
   @apply flex gap-3 mt-7;
 }
 
-.wishlist-btn {
-  @apply border-orange-500 text-orange-500
-  bg-transparent border-2 p-1
-  hover:border-orange-400 hover:text-orange-400
-  transition-colors duration-300 ease-out;
+.emphasized-btn {
+  @apply p-1;
 }
 
 .wishlist-icon {
