@@ -80,16 +80,14 @@ watch(activeSlideIdx, () => {
     <ul class="carousel">
       <PreviousSlideBtn @click="onBackBtnClick" />
       <NextSlideBtn @click="onNextBtnClick" />
-      <TransitionGroup name="slides">
-        <CarouselSlide
-          v-for="(slide, key) in slides"
-          :key="key"
-          v-bind="slide"
-          v-show="key === activeSlideIdx"
-          @slide-content-mouseenter="pauseSlideTimer"
-          @slide-content-mouseleave="resumeSlideTimer"
-        />
-      </TransitionGroup>
+      <CarouselSlide
+        v-for="(slide, key) in slides"
+        :key="key"
+        v-bind="slide"
+        :class="key === activeSlideIdx && 'active-slide'"
+        @slide-content-mouseenter="pauseSlideTimer"
+        @slide-content-mouseleave="resumeSlideTimer"
+      />
       <div class="slide-pagination-buttons">
         <div
           v-for="(slide, idx) in slides"
@@ -115,24 +113,6 @@ watch(activeSlideIdx, () => {
   @apply relative h-[700px];
 }
 
-.slides-leave-from,
-.slides-enter-from {
-  @apply brightness-[0.2];
-}
-
-.slides-leave-from {
-  @apply delay-100;
-}
-
-.slides-enter-to {
-  @apply brightness-100;
-}
-
-.slides-enter-active,
-.slides-leave-active {
-  @apply transition-all duration-700;
-}
-
 .slide-pagination-buttons {
   @apply flex mt-6 h-3 w-[250px] gap-3
   absolute bottom-32 pl-14;
@@ -151,5 +131,9 @@ watch(activeSlideIdx, () => {
 
 .slide-progress-bar {
   @apply w-0 h-[100%] bg-orange-500 rounded-2xl;
+}
+
+.active-slide {
+  @apply brightness-100 opacity-100;
 }
 </style>

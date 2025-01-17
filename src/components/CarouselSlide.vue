@@ -40,7 +40,7 @@ const genres = computed(() => props.genres.join(', '))
 </script>
 
 <template>
-  <li>
+  <li class="carousel-slide">
     <img class="image-background" :src="props.src" :alt="props.alt" />
     <div class="slide-content">
       <div
@@ -77,8 +77,10 @@ const genres = computed(() => props.genres.join(', '))
 </template>
 
 <style scoped>
-li {
-  @apply absolute inset-0;
+.carousel-slide {
+  @apply absolute inset-0
+  brightness-[0.2] opacity-0
+  transition-all duration-700;
 }
 
 .image-background {
