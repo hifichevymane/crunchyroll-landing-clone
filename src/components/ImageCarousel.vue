@@ -3,7 +3,7 @@ import CarouselSlide from './CarouselSlide.vue'
 import PreviousSlideBtn from './PreviousSlideBtn.vue'
 import NextSlideBtn from './NextSlideBtn.vue'
 
-import slideContent from '../assets/slide-content.json'
+import slideContent from '@/slide-content'
 
 import { ref, watch } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
@@ -80,16 +80,14 @@ watch(activeSlideIdx, () => {
     <ul class="carousel">
       <PreviousSlideBtn @click="onBackBtnClick" />
       <NextSlideBtn @click="onNextBtnClick" />
-      <TransitionGroup name="slides">
-        <CarouselSlide
-          v-for="(slide, key) in slides"
-          :key="key"
-          v-bind="slide"
-          v-show="key === activeSlideIdx"
-          @slide-content-mouseenter="pauseSlideTimer"
-          @slide-content-mouseleave="resumeSlideTimer"
-        />
-      </TransitionGroup>
+      <CarouselSlide
+        v-for="(slide, key) in slides"
+        :key="key"
+        v-bind="slide"
+        :active="key === activeSlideIdx"
+        @slide-content-mouseenter="pauseSlideTimer"
+        @slide-content-mouseleave="resumeSlideTimer"
+      />
       <div class="slide-pagination-buttons">
         <div
           v-for="(slide, idx) in slides"
@@ -113,24 +111,6 @@ watch(activeSlideIdx, () => {
 <style scoped>
 .carousel {
   @apply relative h-[700px];
-}
-
-.slides-leave-from,
-.slides-enter-from {
-  @apply brightness-[0.2];
-}
-
-.slides-leave-from {
-  @apply delay-100;
-}
-
-.slides-enter-to {
-  @apply brightness-100;
-}
-
-.slides-enter-active,
-.slides-leave-active {
-  @apply transition-all duration-700;
 }
 
 .slide-pagination-buttons {
