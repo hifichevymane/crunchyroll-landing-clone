@@ -33,16 +33,25 @@ const props = defineProps({
     default: () => [],
     required: false,
   },
+  active: {
+    type: Boolean,
+    default: false,
+  },
 })
+const emit = defineEmits(['slide-content-mouseenter', 'slide-content-mouseleave'])
 
 const genres = computed(() => props.genres.join(', '))
 </script>
 
 <template>
-  <li>
+  <li class="carousel-slide" :class="props.active && 'active-slide'">
     <img class="image-background" :src="props.src" :alt="props.alt" />
     <div class="slide-content">
-      <div class="wrapper">
+      <div
+        class="wrapper"
+        @mouseenter="emit('slide-content-mouseenter')"
+        @mouseleave="emit('slide-content-mouseleave')"
+      >
         <img class="logo" :src="props.logo" alt="Anime Logo" />
         <div class="tags">
           <div class="age-rating">
@@ -54,7 +63,7 @@ const genres = computed(() => props.genres.join(', '))
         <p class="slide-description">{{ props.description }}</p>
         <div class="slide-buttons">
           <StartWatchingBtn>Start watching e1</StartWatchingBtn>
-          <button class="wishlist-btn">
+          <button class="emphasized-btn">
             <svg
               class="wishlist-icon"
               xmlns="http://www.w3.org/2000/svg"
@@ -72,8 +81,14 @@ const genres = computed(() => props.genres.join(', '))
 </template>
 
 <style scoped>
-li {
-  @apply absolute inset-0;
+.carousel-slide {
+  @apply absolute inset-0
+  brightness-[0.2] opacity-0
+  transition-all duration-700;
+}
+
+.active-slide {
+  @apply brightness-100 opacity-100;
 }
 
 .image-background {
@@ -98,11 +113,8 @@ li {
   @apply flex gap-3 mt-7;
 }
 
-.wishlist-btn {
-  @apply border-orange-500 text-orange-500
-  bg-transparent border-2 p-1
-  hover:border-orange-400 hover:text-orange-400
-  transition-colors duration-300 ease-out;
+.emphasized-btn {
+  @apply p-1;
 }
 
 .wishlist-icon {

@@ -3,7 +3,7 @@ import CarouselSlide from './CarouselSlide.vue'
 import PreviousSlideBtn from './PreviousSlideBtn.vue'
 import NextSlideBtn from './NextSlideBtn.vue'
 
-import slideContent from '../assets/slide-content.json'
+import slideContent from '@/slide-content'
 
 import { ref, watch } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
@@ -57,15 +57,14 @@ const onNextBtnClick = () => {
   changeSlideInterval.resume()
 }
 
-const onSlideBtnMouseOver = () => {
+const pauseSlideTimer = () => {
   changeSlideInterval.pause()
   progressBarInterval.pause()
-
   const elapsedTime = INIT_SLIDE_DURATION_MS * (progressBarWidth.value / 100)
   slideDurationMs.value = INIT_SLIDE_DURATION_MS - elapsedTime
 }
 
-const onSlideBtnMouseOut = () => {
+const resumeSlideTimer = () => {
   changeSlideInterval.resume()
   progressBarInterval.resume()
 }
@@ -81,14 +80,14 @@ watch(activeSlideIdx, () => {
     <ul class="carousel">
       <PreviousSlideBtn @click="onBackBtnClick" />
       <NextSlideBtn @click="onNextBtnClick" />
-      <TransitionGroup name="slides">
-        <CarouselSlide
-          v-for="(slide, key) in slides"
-          :key="key"
-          v-bind="slide"
-          v-show="key === activeSlideIdx"
-        />
-      </TransitionGroup>
+      <CarouselSlide
+        v-for="(slide, key) in slides"
+        :key="key"
+        v-bind="slide"
+        :active="key === activeSlideIdx"
+        @slide-content-mouseenter="pauseSlideTimer"
+        @slide-content-mouseleave="resumeSlideTimer"
+      />
       <div class="slide-pagination-buttons">
         <div
           v-for="(slide, idx) in slides"
@@ -96,8 +95,8 @@ watch(activeSlideIdx, () => {
           class="slide-pagination-btn"
           :class="{ 'active-slide-pagination-btn': idx === activeSlideIdx }"
           @click="activeSlideIdx = idx"
-          @mouseover="onSlideBtnMouseOver"
-          @mouseout="onSlideBtnMouseOut"
+          @mouseenter="pauseSlideTimer"
+          @mouseleave="resumeSlideTimer"
         >
           <div
             class="slide-progress-bar"
@@ -112,24 +111,6 @@ watch(activeSlideIdx, () => {
 <style scoped>
 .carousel {
   @apply relative h-[700px];
-}
-
-.slides-leave-from,
-.slides-enter-from {
-  @apply brightness-[0.2];
-}
-
-.slides-leave-from {
-  @apply delay-100;
-}
-
-.slides-enter-to {
-  @apply brightness-100;
-}
-
-.slides-enter-active,
-.slides-leave-active {
-  @apply transition-all duration-700;
 }
 
 .slide-pagination-buttons {
