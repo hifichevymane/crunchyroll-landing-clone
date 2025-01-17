@@ -1,14 +1,8 @@
-# .
+# Crunchyroll landing page clone
 
-This template should help get you started developing with Vue 3 in Vite.
+The app was written on Vue + Vite
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+<img width="1440" alt="Screenshot 2025-01-17 at 20 59 10" src="https://github.com/user-attachments/assets/924bca5e-44da-4472-a136-319251b6628b" />
 
 ## Project Setup
 
