@@ -3,7 +3,7 @@ import CarouselSlide from './CarouselSlide.vue'
 import PreviousSlideBtn from './PreviousSlideBtn.vue'
 import NextSlideBtn from './NextSlideBtn.vue'
 
-import slideContent from '../assets/slide-content.json'
+import slideContent from '@/slide-content'
 
 import { ref, watch } from 'vue'
 import { useIntervalFn } from '@vueuse/core'
@@ -84,7 +84,7 @@ watch(activeSlideIdx, () => {
         v-for="(slide, key) in slides"
         :key="key"
         v-bind="slide"
-        :class="key === activeSlideIdx && 'active-slide'"
+        :active="key === activeSlideIdx"
         @slide-content-mouseenter="pauseSlideTimer"
         @slide-content-mouseleave="resumeSlideTimer"
       />
@@ -131,9 +131,5 @@ watch(activeSlideIdx, () => {
 
 .slide-progress-bar {
   @apply w-0 h-[100%] bg-orange-500 rounded-2xl;
-}
-
-.active-slide {
-  @apply brightness-100 opacity-100;
 }
 </style>
