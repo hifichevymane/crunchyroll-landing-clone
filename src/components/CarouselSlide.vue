@@ -34,6 +34,7 @@ const props = defineProps({
     required: false,
   },
 })
+const emit = defineEmits(['slide-content-mouseenter', 'slide-content-mouseleave'])
 
 const genres = computed(() => props.genres.join(', '))
 </script>
@@ -42,7 +43,11 @@ const genres = computed(() => props.genres.join(', '))
   <li>
     <img class="image-background" :src="props.src" :alt="props.alt" />
     <div class="slide-content">
-      <div class="wrapper">
+      <div
+        class="wrapper"
+        @mouseenter="emit('slide-content-mouseenter')"
+        @mouseleave="emit('slide-content-mouseleave')"
+      >
         <img class="logo" :src="props.logo" alt="Anime Logo" />
         <div class="tags">
           <div class="age-rating">

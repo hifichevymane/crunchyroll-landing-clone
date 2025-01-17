@@ -57,15 +57,14 @@ const onNextBtnClick = () => {
   changeSlideInterval.resume()
 }
 
-const onSlideBtnMouseOver = () => {
+const pauseSlideTimer = () => {
   changeSlideInterval.pause()
   progressBarInterval.pause()
-
   const elapsedTime = INIT_SLIDE_DURATION_MS * (progressBarWidth.value / 100)
   slideDurationMs.value = INIT_SLIDE_DURATION_MS - elapsedTime
 }
 
-const onSlideBtnMouseOut = () => {
+const resumeSlideTimer = () => {
   changeSlideInterval.resume()
   progressBarInterval.resume()
 }
@@ -87,6 +86,8 @@ watch(activeSlideIdx, () => {
           :key="key"
           v-bind="slide"
           v-show="key === activeSlideIdx"
+          @slide-content-mouseenter="pauseSlideTimer"
+          @slide-content-mouseleave="resumeSlideTimer"
         />
       </TransitionGroup>
       <div class="slide-pagination-buttons">
@@ -96,8 +97,8 @@ watch(activeSlideIdx, () => {
           class="slide-pagination-btn"
           :class="{ 'active-slide-pagination-btn': idx === activeSlideIdx }"
           @click="activeSlideIdx = idx"
-          @mouseover="onSlideBtnMouseOver"
-          @mouseout="onSlideBtnMouseOut"
+          @mouseenter="pauseSlideTimer"
+          @mouseleave="resumeSlideTimer"
         >
           <div
             class="slide-progress-bar"
