@@ -90,7 +90,17 @@ import LangDropdown from './LangDropdown.vue'
         <h4>Crunchyroll</h4>
         <ul class="info-section-links">
           <li>
-            <a href="#" class="footer-link">Start a free trial</a>
+            <a href="#" class="footer-link free-trial-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+                <path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="M7.41 1.713a.5.5 0 0 0-.82 0L3.432 6.225L.854 3.646A.5.5 0 0 0 0 4v6.5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a.5.5 0 0 0-.854-.354l-2.578 2.579z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Start a free trial
+            </a>
           </li>
           <li>
             <a href="#" class="footer-link">about</a>
@@ -194,5 +204,9 @@ h4 {
 
 .company-name {
   @apply text-gray-400 text-sm;
+}
+
+.free-trial-link {
+  @apply text-yellow-400;
 }
 </style>
