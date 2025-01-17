@@ -7,3 +7,14 @@
 body {
   @apply bg-black;
 }
+
+@layer components {
+  .emphasized-btn {
+    @apply flex font-semibold items-center
+    gap-1 justify-center uppercase h-[40px]
+    border-orange-500 text-orange-500
+    bg-transparent border-2 py-3 px-5
+    hover:border-orange-400 hover:text-orange-400
+    transition-colors duration-300 ease-out;
+  }
+}
