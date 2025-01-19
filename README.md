@@ -30,28 +30,16 @@ npm run lint
 
 ## Run development Dockerfile
 
-### Build the development image
+### Run docker-compose.dev.yml
 
 ```sh
-docker build -f Dockerfile.dev -t hifichevymane/crunchyroll-clone-dev .
-```
-
-### Run the development container
-
-```sh
-docker run -p 5173:5173 --name crunchyroll-clone-dev hifichevymane/cruncyroll-clone-dev
+docker-compose -f docker-compose.dev.yml up --build
 ```
 
 ## Run production Dockerfile
 
-### Build the production image
+### Run docker-compose.prod.yml
 
 ```sh
-docker build -f Dockerfile.prod -t hifichevymane/crunchyroll-clone-prod .
-```
-
-### Run the production container
-
-```sh
-docker run -p 8080:80 --name crunchyroll-clone-prod hifichevymane/crunchyroll-clone-prod
+docker-compose -f docker-compose.prod.yml up -d --build
 ```
