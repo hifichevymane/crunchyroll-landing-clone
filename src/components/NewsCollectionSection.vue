@@ -1,17 +1,20 @@
 <script setup>
+import newsFirstImg from '../assets/img/news-img-1.jpeg'
+import newsSecondImg from '../assets/img/news-img-2.jpeg'
+
 import TopNewsCard from './TopNewsCard.vue'
 import LatestNewsCard from './LatestNewsCard.vue'
 
 const TOP_NEWS = [
   {
-    imgSrc: '/src/assets/img/news-img-1.jpeg',
+    imgSrc: newsFirstImg,
     imgAlt: 'Pizdec',
     header: 'Here’s the Exact Time The Apothecary Diaries Season 2 Premieres on Crunchyroll',
     date: new Date(),
     author: 'John Doe',
   },
   {
-    imgSrc: '/src/assets/img/news-img-1.jpeg',
+    imgSrc: newsFirstImg,
     imgAlt: 'Pizdec',
     header: 'Here’s the Exact Time The Apothecary Diaries Season 2 Premieres on Crunchyroll',
     date: new Date(),
@@ -21,42 +24,42 @@ const TOP_NEWS = [
 
 const LATEST_NEWS = [
   {
-    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgSrc: newsSecondImg,
     imgAlt: 'Solo Leveling News',
     header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
     date: new Date(),
     author: 'John Doe',
   },
   {
-    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgSrc: newsSecondImg,
     imgAlt: 'Solo Leveling News',
     header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
     date: new Date(),
     author: 'John Doe',
   },
   {
-    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgSrc: newsSecondImg,
     imgAlt: 'Solo Leveling News',
     header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
     date: new Date(),
     author: 'John Doe',
   },
   {
-    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgSrc: newsSecondImg,
     imgAlt: 'Solo Leveling News',
     header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
     date: new Date(),
     author: 'John Doe',
   },
   {
-    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgSrc: newsSecondImg,
     imgAlt: 'Solo Leveling News',
     header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
     date: new Date(),
     author: 'John Doe',
   },
   {
-    imgSrc: '/src/assets/img/news-img-2.jpeg',
+    imgSrc: newsSecondImg,
     imgAlt: 'Solo Leveling News',
     header: 'Solo Leveling Season 2 Anime Unveils Iron Shadow Visual',
     date: new Date(),

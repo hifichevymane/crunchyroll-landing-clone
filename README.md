@@ -27,3 +27,19 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## Run development Dockerfile
+
+### Run docker-compose.dev.yml
+
+```sh
+docker-compose -f docker-compose.dev.yml up --build
+```
+
+## Run production Dockerfile
+
+### Run docker-compose.prod.yml
+
+```sh
+docker-compose -f docker-compose.prod.yml up -d --build
+```
