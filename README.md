@@ -27,3 +27,31 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## Run development Dockerfile
+
+### Build the development image
+
+```sh
+docker build -f Dockerfile.dev -t hifichevymane/crunchyroll-clone-dev .
+```
+
+### Run the development container
+
+```sh
+docker run -p 5173:5173 --name crunchyroll-clone-dev hifichevymane/cruncyroll-clone-dev
+```
+
+## Run production Dockerfile
+
+### Build the production image
+
+```sh
+docker build -f Dockerfile.prod -t hifichevymane/crunchyroll-clone-prod .
+```
+
+### Run the production container
+
+```sh
+docker run -p 8080:80 --name crunchyroll-clone-prod hifichevymane/cruncyroll-clone-prod
+```
