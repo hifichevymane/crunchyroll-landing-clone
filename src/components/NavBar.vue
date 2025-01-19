@@ -1,4 +1,6 @@
 <script setup>
+import crunchyrollLogo from '../assets/crunchyroll.svg'
+
 import BrowseDropdown from './BrowseDropdown.vue'
 import NewsDropdown from './NewsDropdown.vue'
 import FadeTransition from './FadeTransition.vue'
@@ -73,7 +75,7 @@ const onTrialPremiumMouseOut = () => {
     <ul class="navbar">
       <div class="nav-menu">
         <li class="nav-item logo">
-          <img src="/src/assets/crunchyroll.svg" alt="Crunchyroll logo" />
+          <img :src="crunchyrollLogo" alt="Crunchyroll logo" />
         </li>
         <li
           class="nav-item"

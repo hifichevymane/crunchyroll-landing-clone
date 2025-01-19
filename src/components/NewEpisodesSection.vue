@@ -1,4 +1,5 @@
 <script setup>
+import narutoAnimeImg from '../assets/img/Naruto.webp'
 import NewEpisodeCard from './NewEpisodeCard.vue'
 
 import { ref } from 'vue'
@@ -8,38 +9,38 @@ const episodes = [
     title: 'Naruto',
     episodeNumber: 24,
     duration: '23:01',
-    previewImgSrc: '/src/assets/img/Naruto.webp',
+    previewImgSrc: narutoAnimeImg,
   },
   {
     title: 'Naruto',
     episodeNumber: 24,
     duration: '23:01',
-    previewImgSrc: '/src/assets/img/Naruto.webp',
+    previewImgSrc: narutoAnimeImg,
   },
   {
     title: 'Naruto',
     episodeNumber: 24,
     duration: '23:01',
-    previewImgSrc: '/src/assets/img/Naruto.webp',
+    previewImgSrc: narutoAnimeImg,
     dubbing: true,
   },
   {
     title: 'Naruto',
     episodeNumber: 24,
     duration: '23:01',
-    previewImgSrc: '/src/assets/img/Naruto.webp',
+    previewImgSrc: narutoAnimeImg,
   },
   {
     title: 'Naruto',
     episodeNumber: 24,
     duration: '23:01',
-    previewImgSrc: '/src/assets/img/Naruto.webp',
+    previewImgSrc: narutoAnimeImg,
     dubbing: true,
   },
   {
     title: 'Naruto',
     episodeNumber: 24,
-    previewImgSrc: '/src/assets/img/Naruto.webp',
+    previewImgSrc: narutoAnimeImg,
     duration: '23:01',
   },
 ]

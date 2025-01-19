@@ -1,4 +1,5 @@
 <script setup>
+import newsImg from '../assets/img/news-img-4.jpeg'
 import SeriesCard from './SeriesCard.vue'
 
 const seriesInfo = {
@@ -8,7 +9,7 @@ const seriesInfo = {
     doloribus aspernatur, neque at amet labore, natus dolorem vitae unde minima illo voluptatum
     aut officia, accusamus voluptatem!
   `,
-  imgSrc: '/src/assets/img/news-img-4.jpeg',
+  imgSrc: newsImg,
   imgAlt: 'JoJo Bizarre Adventure Series',
 }
 
