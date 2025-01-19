@@ -53,5 +53,5 @@ docker build -f Dockerfile.prod -t hifichevymane/crunchyroll-clone-prod .
 ### Run the production container
 
 ```sh
-docker run -p 8080:80 --name crunchyroll-clone-prod hifichevymane/cruncyroll-clone-prod
+docker run -p 8080:80 --name crunchyroll-clone-prod hifichevymane/crunchyroll-clone-prod
 ```
